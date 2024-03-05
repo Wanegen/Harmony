@@ -1,0 +1,18 @@
+<% if @vinyls.any? %>
+<% @vinyls.each do |vinyl| %>
+  <div class="vinyl">
+    <div class="vinyl-title">
+      <%= vinyl.title %>
+    </div>
+    <div class="vinyl-artist">
+      <%= vinyl.artist_name %>
+    </div>
+  <div class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+<%= link_to 'Vinyl détails', vinyl_path(vinyl)%>
+</div>
+  </div>
+<% end %>
+<% else %>
+<p>Nous n'avons pas trouvé de correspondance à votre recherche.</p>
+<% end %>
+  </div>

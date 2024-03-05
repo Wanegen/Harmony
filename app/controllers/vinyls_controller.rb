@@ -1,6 +1,22 @@
 class VinylsController < ApplicationController
   def index
-    @vinyls = Vinyl.all
+    if params[:query].present?
+      @vinyls = Vinyl.search(params[:query])
+     #params[:query] = nil
+    else
+      @vinyls = Vinyl.all
+    end
+
+  respond_to do |format|
+      format.html
+      format.text do
+      render partial: 'vinyls/index', locals: { vinyls: @vinyls }, formats: [:html]
+      end
+    end
+  end
+
+  def show
+    @vinyl = Vinyl.find(params[:id])
   end
 
   def new
@@ -15,15 +31,12 @@ class VinylsController < ApplicationController
     redirect_to user_vinyls_path(current_user)
   end
 
-  def show
-    @vinyl = Vinyl.find(params[:id])
-  end
 
   def destroy
     @vinyl = Vinyl.find(params[:id])
     @vinyl.destroy
 
-    redirect_to user_vinyls_path
+    redirect_to vinyls_path
   end
 
   private
