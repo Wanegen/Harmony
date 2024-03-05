@@ -1,6 +1,6 @@
 class GptApiImageCallService < ApplicationService
-  def initialize(vinyl)
-    @vinyl = vinyl
+  def initialize(scan)
+    @scan = scan
   end
 
   def call
@@ -17,13 +17,13 @@ class GptApiImageCallService < ApplicationService
             {
               type: "image_url",
               image_url: {
-                url: @vinyl.image.url,
+                url: @scan.image.url,
               },
             },
           ] },
         ],
       },
     )
-    return chaptgpt_response["choices"][0]["message"]["content"]
+    return chaptgpt_response
   end
 end
