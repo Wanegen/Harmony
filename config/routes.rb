@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  resources :vinyls, only: %i[index show destroy]
   resources :users do
-    resources :vinyls, only: %i[index show destroy]
     resources :scans, only: %i[new create show]
   end
 

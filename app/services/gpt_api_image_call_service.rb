@@ -3,7 +3,7 @@ class GptApiImageCallService < ApplicationService
   end
 
   def call
-    client = OpenAI::Client.new(access_token: "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")
+    client = OpenAI::Client.new(access_token: "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")
     chaptgpt_response = client.chat(
       parameters: {
         model: "gpt-4-vision-preview",

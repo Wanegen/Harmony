@@ -1,29 +1,10 @@
 class VinylsController < ApplicationController
   def index
-    @vinyls = Vinyl.all
-  end
-
-  def new
-    @vinyl = Vinyl.new
-  end
-
-  def create
-    @vinyl = Vinyl.new(vinyl_params)
-    @vinyl.user = current_user
-    @vinyl.save
-
-    redirect_to user_vinyls_path(current_user)
+    @vinyls = Discogs::Wrapper.all
   end
 
   def show
-    @vinyl = Vinyl.find(params[:id])
-  end
-
-  def destroy
-    @vinyl = Vinyl.find(params[:id])
-    @vinyl.destroy
-
-    redirect_to user_vinyls_path
+    @vinyl = DiscogsApi.new.get_vinyl(params[:id])
   end
 
   private
