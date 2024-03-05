@@ -1,9 +1,10 @@
 class GptApiImageCallService < ApplicationService
-  def initialize
+  def initialize(vinyl)
+    @vinyl = vinyl
   end
 
   def call
-    client = OpenAI::Client.new(access_token: "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")
+    client = OpenAI::Client.new(access_token: ENV["OPENAI_ACCESS_TOKEN"])
     chaptgpt_response = client.chat(
       parameters: {
         model: "gpt-4-vision-preview",
@@ -16,7 +17,7 @@ class GptApiImageCallService < ApplicationService
             {
               type: "image_url",
               image_url: {
-                url: "https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png",
+                url: @vinyl.image.url,
               },
             },
           ] },

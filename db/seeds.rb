@@ -13,12 +13,14 @@ u = User.create!(
 
 puts "Creating Vinyls..."
 
-Vinyl.create(
+vinyl = Vinyl.create(
   title: 'Meteora',
   artist_name: "Linkin Park",
   year: 2003,
   user: u
 )
+vinyl.image.attach(io: File.open('app/assets/images/iron_maiden.webp'), filename: 'iron_maiden.webp', content_type: 'image/webp')
+vinyl.save
 
 Vinyl.create(
   title: 'XX',
