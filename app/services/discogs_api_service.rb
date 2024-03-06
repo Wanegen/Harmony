@@ -1,4 +1,5 @@
 class DiscogsApi < ApplicationService
+
   def initialize
     super
     @auth_wrapper = Discogs::Wrapper.new('Harmony', user_token: ENV['DISCOGS_TOKEN'])
@@ -10,6 +11,8 @@ class DiscogsApi < ApplicationService
 
   def get_master(master_id)
     @auth_wrapper.get_master(master_id).title
+   
+  end
 
     # vinyl_attributes = {
     #   title: response.title,

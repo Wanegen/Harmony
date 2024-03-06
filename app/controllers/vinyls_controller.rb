@@ -7,7 +7,7 @@ class VinylsController < ApplicationController
       @vinyls = Vinyl.all
     end
 
-  respond_to do |format|
+respond_to do |format|
       format.html
       format.text do
         render partial: 'vinyls/index', locals: { vinyls: @vinyls }, formats: [:html]
