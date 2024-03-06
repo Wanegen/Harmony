@@ -6,6 +6,10 @@ gem "devise"
 
 gem "discogs-wrapper"
 
+gem 'json'
+
+gem 'open-uri'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 
