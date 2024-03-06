@@ -1,4 +1,4 @@
-class DiscogsApi < ApplicationService
+class DiscogsApiService < ApplicationService
   def initialize
     super
     @auth_wrapper = Discogs::Wrapper.new('Harmony', user_token: ENV['DISCOGS_TOKEN'])
