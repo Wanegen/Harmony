@@ -12,7 +12,7 @@ class GptApiImageCallService < ApplicationService
           { role: "user",
            content: [
             {
-              type: "text", text: "Give me the name year band of this album with this format: name, year, band",
+              type: "text", text: "This is an album cover. Give me the name, date and artist with this format: name, date, artist",
             },
             {
               type: "image_url",

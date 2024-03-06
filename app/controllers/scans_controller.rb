@@ -9,22 +9,24 @@ class ScansController < ApplicationController
 
   def create
     @scan = Scan.new(scan_params)
-    @scan.user = current_user
-    @scan.save
+    @scan.save!
 
-    chaptgpt_response = GptApiImageCallService.call(@scan)# background job
+    chaptgpt_response = GptApiImageCallService.call(@scan) # background job
 
-    infos = chaptgpt_response["choices"][0]["message"]["content"].split(",").map(&:strip)
+    puts "🎂 -----"
+    p chaptgpt_response
 
+    @infos = chaptgpt_response["choices"][0]["message"]["content"].split(",").map(&:strip)
+    p @infos
     @scan.ai_response = {
-      title: infos[0],
-      year: infos[1],
-      artist_name: infos[2]
+      title: @infos[0],
+      year: @infos[1],
+      artist_name: @infos[2]
     }
 
-    @scan.save
+    @scan.save!
 
-    redirect_to user_vinyls_path(current_user)
+    redirect_to scan_path(@scan)
   end
 
   private
