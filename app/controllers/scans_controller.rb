@@ -1,6 +1,7 @@
 class ScansController < ApplicationController
   def show
     @scan = Scan.find(params[:id])
+    @vinyl = Vinyl.new
   end
 
   def new
@@ -13,10 +14,10 @@ class ScansController < ApplicationController
 
     chaptgpt_response = GptApiImageCallService.call(@scan) # background job
 
-    puts "🎂 -----"
+    puts '🎂 -----'
     p chaptgpt_response
 
-    @infos = chaptgpt_response["choices"][0]["message"]["content"].split(",").map(&:strip)
+    @infos = chaptgpt_response['choices'][0]['message']['content'].split(',').map(&:strip)
     p @infos
     @scan.ai_response = {
       title: @infos[0],

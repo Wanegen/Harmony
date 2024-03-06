@@ -13,9 +13,14 @@ class DiscogsApiService < ApplicationService
     @auth_wrapper.get_master(master_id).title
   end
 
-    # vinyl_attributes = {
-    #   title: response.title,
-    #   artist_name: response.artists[0].name,
-    #   year: response.year,
-    # }
+  def search(vinyl)
+    discogs_vinyl = @auth_wrapper.search(
+      vinyl.title,
+      artist: vinyl.artist_name,
+      year: vinyl.year,
+      resource_url: vinyl.resource_url #Rechercher à travers cette URL pour choper le main release qui nous filera la tracklist
+    ).results.first
+
+    return discogs_vinyl
+  end
 end
