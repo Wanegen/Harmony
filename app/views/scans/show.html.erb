@@ -1,4 +1,12 @@
-<h1>Résultat de la recherche :</h1>
-<%= @scan&.title %>
-<%= @scan&.year %>
-<%= @scan&.artist_name %>
+<div class="container scan"
+  data-controller="scan-subscription"
+  data-scan-subscription-scan-id-value="<%= @scan.id %>"
+  data-scan-subscription-target="scans">
+
+  <h1>Résultat de la recherche :</h1>
+  <div class="scan" data-scan-subscription-target="scans">
+    <h2><%= @scan.title %></h2>
+    <p><%= @scan.year %></p>
+    <p><%= @scan.artist_name%></p>
+  </div>
+</div>

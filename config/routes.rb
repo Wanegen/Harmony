@@ -7,4 +7,10 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
   # Defines the root path route (“/”)
   root 'pages#home'
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+      mount Sidekiq::Web => '/sidekiq'
+  end
+
+
 end
