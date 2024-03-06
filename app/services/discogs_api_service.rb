@@ -1,6 +1,7 @@
 class DiscogsApi < ApplicationService
+
   def initialize
-    @auth_wrapper = Discogs::Wrapper.new("Harmony", user_token: "NLeTHnrtngSWvBiEKbkdrXJEHJooNjhcfqdJecDg")
+    @auth_wrapper = Discogs::Wrapper.new('Harmony', user_token: ENV['DISCOGS_TOKEN'])
   end
 
   def get_artist(artist_id)
