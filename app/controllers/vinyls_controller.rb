@@ -37,6 +37,11 @@ class VinylsController < ApplicationController
     @vinyl.destroy
 
     redirect_to vinyls_path
+    @vinyls = Discogs::Wrapper.all
+  end
+
+  def show
+    @vinyl = DiscogsApi.new.get_vinyl(params[:id])
   end
 
   private
