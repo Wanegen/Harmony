@@ -10,13 +10,13 @@ class VinylsController < ApplicationController
   respond_to do |format|
       format.html
       format.text do
-      render partial: 'vinyls/index', locals: { vinyls: @vinyls }, formats: [:html]
+        render partial: 'vinyls/index', locals: { vinyls: @vinyls }, formats: [:html]
       end
     end
   end
 
   def show
-    @vinyl = Vinyl.find(params[:id])
+    @vinyl = DiscogsApi.new.get_vinyl(params[:id])
   end
 
   def new
@@ -40,9 +40,6 @@ class VinylsController < ApplicationController
     @vinyls = Discogs::Wrapper.all
   end
 
-  def show
-    @vinyl = DiscogsApi.new.get_vinyl(params[:id])
-  end
 
   private
 
