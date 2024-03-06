@@ -26,4 +26,10 @@ class ScansController < ApplicationController
 
     redirect_to user_vinyls_path(current_user)
   end
+
+  private
+
+  def scan_params
+    params.require(:scan).permit(:image)
+  end
 end
