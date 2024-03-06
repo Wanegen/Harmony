@@ -1,3 +1,8 @@
-<h1 class="text-3xl font-bold underline">
+<h1 class="text-3xl font-bold underline m-7">
       Hello world!
 </h1>
+
+<%= form_with model: @scan do |form| %>
+  <%= form.file_field :picture, class:"block mb-2 text-sm font-medium text-gray-900 dark:text-dark" %>
+  <%= form.submit "Search", class:"block w-40 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"%>
+<% end %>
