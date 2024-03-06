@@ -1,4 +1,14 @@
-<h1>Détails de l'album</h1>
-<p>Titre : <%= @vinyl[:title] %></p>
-<p>Artiste : <%= @vinyl[:artist_name] %></p>
-<p>Année : <%= @vinyl[:year] %></p>
+<div class="vinyl">
+  <div class="vinyl-title">
+    <%= @vinyl.title %>
+  </div>
+  <div class="vinyl-artist">
+    <%= @vinyl.artist_name %>
+  </div>
+  <div class="vinyl-year">
+    <%= @vinyl.year %>
+  </div>
+<div class="btn">
+<%= link_to 'Retourner à la bibliothèque', vinyls_path%>
+</div>
+</div>
