@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { createConsumer } from "@rails/actioncable";
+import { createConsumer } from "@rails/actioncable"
 
 // Connects to data-controller="scan-subscription"
 export default class extends Controller {
@@ -9,15 +9,12 @@ export default class extends Controller {
 
   connect() {
     console.log("coucou");
+    console.log(this.scanIdValue);
     this.channel= createConsumer().subscriptions.create(
-      {channel: "ScanChannel", id: this.scanIdValue},
-      { received: data => console.log("salut") })
+      {channel: "ScanChannel", scan_id: this.scanIdValue},
+      { received: data => this.displayScan(data) })
   }
   displayScan(data) {
     console.log(data);
   }
 }
-
-
-
-// this.displayScan(data)

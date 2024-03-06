@@ -1,7 +1,7 @@
 class ScanChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
-    scan = Scan.find(params[:id])
+    scan = Scan.find(params[:scan_id])
     p scan
     stream_for scan
   end
