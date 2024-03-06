@@ -1,9 +1,10 @@
 class GptApiImageCallService < ApplicationService
-  def initialize
+  def initialize(scan)
+    @scan = scan
   end
 
   def call
-    client = OpenAI::Client.new(access_token: "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")
+    client = OpenAI::Client.new(access_token: ENV["OPENAI_ACCESS_TOKEN"])
     chaptgpt_response = client.chat(
       parameters: {
         model: "gpt-4-vision-preview",
@@ -16,13 +17,13 @@ class GptApiImageCallService < ApplicationService
             {
               type: "image_url",
               image_url: {
-                url: "https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png",
+                url: @scan.image.url,
               },
             },
           ] },
         ],
       },
     )
-    return chaptgpt_response["choices"][0]["message"]["content"]
+    return chaptgpt_response
   end
 end
