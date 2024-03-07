@@ -12,9 +12,9 @@ class CreateScanJob < ApplicationJob
     }
 
     if scan.save
-      ActionCable.server.broadcast(
-        "scan_#{scan.id}",
-        {html: ApplicationController::render(partial: "scans/scan", locals: { scan: scan }, layout: false, formats: %i[html])}
+      ScanChannel.broadcast_to(
+        scan,
+        json: { scan: scan, ai_response: scan.ai_response }
       )
     end
     # broadcast to the chatgpt channel

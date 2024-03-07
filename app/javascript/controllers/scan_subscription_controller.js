@@ -10,15 +10,17 @@ export default class extends Controller {
   connect() {
     console.log("coucou");
     console.log(this.scanIdValue);
-    this.channel= createConsumer().subscriptions.create(
+    this.channel = createConsumer().subscriptions.create(
       {
         channel: "ScanChannel",
-        scan_id: this.scanIdValue
+        id: this.scanIdValue
       },
       {
-        received: data => this.displayScan(data)
-      }
+        received: data => this.displayScan(data),
+      },
+
     )
+    console.log(this.channel);
   }
   displayScan(data) {
     console.log(data);
