@@ -1,3 +1,4 @@
+
 <div class="container scan"
   data-controller="scan-subscription"
   data-scan-subscription-scan-id-value="<%= @scan.id %>"
@@ -10,3 +11,16 @@
     <%= @scan&.artist_name %>
   </div>
 </div>
+
+
+
+<%= form_with model: @vinyl do |f| %>
+
+  <%= f.hidden_field :title, value: @scan.title %>
+  <%= f.hidden_field :artist_name, value: @scan.artist_name %>
+  <%= f.hidden_field :year, value: @scan.year %>
+
+  <%= f.submit "Valider", class: "block w-40 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
+
+<% end %>
+

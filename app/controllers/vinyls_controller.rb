@@ -16,7 +16,13 @@ class VinylsController < ApplicationController
   end
 
   def show
-    @vinyl = DiscogsApi.new.get_vinyl(params[:id])
+    @vinyl = Vinyl.find(params[:id])
+    discogs_vinyl = DiscogsApiService.new.search(@vinyl)
+    @vinyl.title = discogs_vinyl.title
+    @vinyl.genre = discogs_vinyl.genre.join('')
+    @vinyl.country = discogs_vinyl.country
+    @vinyl.resource_url = discogs_vinyl.resource_url
+    @vinyl.save
   end
 
   def new
@@ -25,10 +31,10 @@ class VinylsController < ApplicationController
 
   def create
     @vinyl = Vinyl.new(vinyl_params)
-    @vinyl.user = current_user
-    @vinyl.save
+    @vinyl.user = User.first ## bien changer en current_user
+    @vinyl.save!
 
-    redirect_to user_vinyls_path(current_user)
+    redirect_to vinyl_path(@vinyl)
   end
 
 
