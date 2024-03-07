@@ -10,15 +10,17 @@ class ScansController < ApplicationController
 
   def create
     @scan = Scan.new(scan_params)
-    if @scan.save
-      CreateScanJob.perform_later(@scan.id)
-      redirect_to scan_path(@scan)
-    else
-      flash[:alert] = "Something went wrong"
-      render :new
-    end
+    @scan.save!
+    puts "✅✅✅✅✅✅✅✅"
+    puts @scan.id
+    puts "✅✅✅✅✅✅✅✅"
+    CreateScanJob.perform_later(@scan.id)
+    # else
+    # flash[:alert] = "Something went wrong"
+    # render :new
+    # end
 
-
+    redirect_to scan_path(@scan)
   end
 
   private
