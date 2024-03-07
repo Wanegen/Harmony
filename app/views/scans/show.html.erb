@@ -1,10 +1,12 @@
 <div class="container scan"
   data-controller="scan-subscription"
   data-scan-subscription-scan-id-value="<%= @scan.id %>"
-  data-scan-subscription-target="scans">
+  >
 
   <h1>Résultat de la recherche :</h1>
   <div class="scan" data-scan-subscription-target="scans">
-
+    <%= @scan&.title %>
+    <%= @scan&.year %>
+    <%= @scan&.artist_name %>
   </div>
 </div>

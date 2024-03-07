@@ -11,8 +11,14 @@ export default class extends Controller {
     console.log("coucou");
     console.log(this.scanIdValue);
     this.channel= createConsumer().subscriptions.create(
-      {channel: "ScanChannel", scan_id: this.scanIdValue},
-      { received: data => this.displayScan(data) })
+      {
+        channel: "ScanChannel",
+        scan_id: this.scanIdValue
+      },
+      {
+        received: data => this.displayScan(data)
+      }
+    )
   }
   displayScan(data) {
     console.log(data);
