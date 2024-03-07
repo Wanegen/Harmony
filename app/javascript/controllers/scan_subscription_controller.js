@@ -22,7 +22,7 @@ export default class extends Controller {
     console.log(data);
     const scan = data.scan.ai_response;
 
-    const partial = `<h1>Coucou</h1>
+    const partial = `
       <h2>${scan.title}</h2>
       <p>
         ${scan.artist_name}
