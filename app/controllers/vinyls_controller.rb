@@ -4,7 +4,7 @@ class VinylsController < ApplicationController
       @vinyls = Vinyl.search(params[:query])
      #params[:query] = nil
     else
-      @vinyls = Vinyl.all
+      @vinyls = Vinyl.all.order(created_at: :desc)
     end
 
     respond_to do |format|
@@ -18,7 +18,7 @@ class VinylsController < ApplicationController
   def show
     @vinyl = Vinyl.find(params[:id])
     discogs_vinyl = DiscogsApiService.new.search(@vinyl)
-    @vinyl.title = discogs_vinyl.title
+    @vinyl.release_title = discogs_vinyl.title
     @vinyl.genre = discogs_vinyl.genre.join('')
     @vinyl.year = discogs_vinyl.year
     # On récupère également la resource_url pour avoir accès à une autre URL que l'on parse.
@@ -28,6 +28,8 @@ class VinylsController < ApplicationController
     # On affiche la tracklist dans la vue show.
     discogs_service = DiscogsApiService.new
     @tracklist = discogs_service.fetch_tracklist(@main_release_url)
+    @album_name = discogs_service.fetch_album_name(@main_release_url)
+    @artist_name = discogs_service.fetch_artist_name(@main_release_url)
     @vinyl.save
   end
 
@@ -56,6 +58,6 @@ class VinylsController < ApplicationController
   private
 
   def vinyl_params
-    params.require(:vinyl).permit(:title, :artist_name, :year)
+    params.require(:vinyl).permit(:release_title, :artist_name, :year)
   end
 end

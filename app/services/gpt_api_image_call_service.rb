@@ -13,7 +13,7 @@ class GptApiImageCallService < ApplicationService
             content: [
               {
                 type: 'text', text: 'This is an album cover. Give me the name,
-                date and artist with this format: name, date, artist.'
+                date and artist with this format: name, date, artist'
               },
               {
                 type: 'image_url',

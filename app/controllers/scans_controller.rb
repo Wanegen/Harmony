@@ -20,7 +20,7 @@ class ScansController < ApplicationController
     @infos = chaptgpt_response['choices'][0]['message']['content'].split(',').map(&:strip)
     p @infos
     @scan.ai_response = {
-      title: @infos[0],
+      release_title: @infos[0],
       year: @infos[1],
       artist_name: @infos[2]
     }

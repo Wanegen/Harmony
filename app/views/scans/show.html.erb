@@ -5,7 +5,7 @@
     <div class="flex flex-col items-center">
       <div class="flex mt-8">
         <span class="font-bold text-white">Titre de l'album :</span>
-        <span class="text-white ml-2 text-center"><%= @scan&.title %></span>
+        <span class="text-white ml-2 text-center"><%= @scan&.release_title %></span>
       </div>
       <div class="flex">
         <span class="font-bold text-white">Artiste :</span>
@@ -19,7 +19,7 @@
 
     <%= form_with model: @vinyl do |f| %>
 
-      <%= f.hidden_field :title, value: @scan.title %>
+      <%= f.hidden_field :release_title, value: @scan.release_title %>
       <%= f.hidden_field :artist_name, value: @scan.artist_name %>
       <%= f.hidden_field :year, value: @scan.year %>
 

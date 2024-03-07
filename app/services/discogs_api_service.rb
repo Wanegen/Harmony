@@ -4,21 +4,9 @@ class DiscogsApiService < ApplicationService
     @auth_wrapper = Discogs::Wrapper.new('Harmony', user_token: ENV['DISCOGS_TOKEN'])
   end
 
-  # def search(vinyl)
-  #   discogs_vinyl = @auth_wrapper.search(
-  #     vinyl.title,
-  #     artist: vinyl.artist_name,
-  #     year: vinyl.year,
-  #     genre: vinyl.genre,
-  #     resource_url: vinyl.resource_url
-  #   ).results.first
-
-  #   return discogs_vinyl
-  # end
-
   def search(vinyl)
     discogs_vinyl = @auth_wrapper.search(
-      vinyl.title,
+      vinyl.release_title,
       artist: vinyl.artist_name,
       year: vinyl.year,
       genre: vinyl.genre,
@@ -33,7 +21,6 @@ class DiscogsApiService < ApplicationService
       # Ajouter la main_release_url aux données discogs_vinyl
       discogs_vinyl.main_release_url = main_release_url if main_release_url
     end
-
     return discogs_vinyl
   end
 
@@ -47,9 +34,44 @@ class DiscogsApiService < ApplicationService
     if response.code == '200'
       # Parser les données JSON
       data = JSON.parse(response.body)
-      # Extraire la main_release_url si elle est présente
-      tracklist = data['tracklist']
-      return tracklist
+      # Extraction de la tracklist
+      data['tracklist']
+    else
+      puts "La requête a échoué avec le code : #{response.code}"
+      return nil
+    end
+  end
+
+  def fetch_album_name(main_release_url)
+    # Effectuer la requête HTTP pour récupérer les données JSON
+    uri = URI.parse(main_release_url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true if uri.scheme == 'https'
+    request = Net::HTTP::Get.new(uri)
+    response = http.request(request)
+    if response.code == '200'
+      # Parser les données JSON
+      data = JSON.parse(response.body)
+      # Extraction du titre de l'album
+      data['title']
+    else
+      puts "La requête a échoué avec le code : #{response.code}"
+      return nil
+    end
+  end
+
+  def fetch_artist_name(main_release_url)
+    # Effectuer la requête HTTP pour récupérer les données JSON
+    uri = URI.parse(main_release_url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true if uri.scheme == 'https'
+    request = Net::HTTP::Get.new(uri)
+    response = http.request(request)
+    if response.code == '200'
+      # Parser les données JSON
+      data = JSON.parse(response.body)
+      # Extraction du titre de l'album
+      data['artists'][0]['name']
     else
       puts "La requête a échoué avec le code : #{response.code}"
       return nil
@@ -73,7 +95,7 @@ class DiscogsApiService < ApplicationService
       return main_release_url
     else
       puts "La requête a échoué avec le code : #{response.code}"
-      return nil
+      nil
     end
   end
 end
