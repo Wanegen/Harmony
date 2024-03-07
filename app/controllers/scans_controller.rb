@@ -11,9 +11,6 @@ class ScansController < ApplicationController
   def create
     @scan = Scan.new(scan_params)
     @scan.save!
-    puts "✅✅✅✅✅✅✅✅"
-    puts @scan.id
-    puts "✅✅✅✅✅✅✅✅"
     CreateScanJob.perform_later(@scan.id)
     # else
     # flash[:alert] = "Something went wrong"
