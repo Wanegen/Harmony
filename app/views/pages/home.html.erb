@@ -1,11 +1,16 @@
-<h1 class="text-3xl font-bold underline m-7">
-      Hello world!
-</h1>
+<body class="bg-black h-screen flex justify-center items-center">
 
-<%= form_with model: @scan do |form| %>
-  <%= form.file_field :image, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-dark" %>
-  <%= form.submit "Search", class:"block w-40 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"%>
-<% end %>
+<div class="text-center">
+  <h1 class="text-4xl font-bold m-7 text-white">
+        Scan your vinyl
+  </h1>
+  <%= form_with model: @scan do |form| %>
+    <%= form.file_field :image, class: "flex-row mb-4 items-center content-centermb-2 text-sm font-medium text-gray-900 text-white" %>
+    <%= form.submit "Search", class:"w-40 h-10 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-white focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"%>
+  <% end %>
+</div>
+
+</body>
 
 <%# Ajouter un spinner %>
 <%# Ajouter une div vide pour implémenter le text "Ça cherche..... etc" %>

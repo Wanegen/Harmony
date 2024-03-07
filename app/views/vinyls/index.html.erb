@@ -1,18 +1,21 @@
-<div class="container" data-controller="search-bar">
+<body class="bg-black min-h-screen flex justify-center items-center">
+  <div class="text-center grid grid-cols-1 gap-4 overflow-auto p-8 text-white">
+    <div class="container" data-controller="search-bar">
+        <h1 class="text-2xl font-bold m-8 text-white">Ma bibliothèque</h1>
 
-<h1>Ma bibliothèque</h1>
+    <%= form_with(url: vinyls_path, method: "get", data: { search_bar_target: "form" }) do %>
+      <%= text_field_tag :query,
+                          params[:query],
+                          placeholder: "Rechercher un vinyl...",
+                          data: {
+                          action: "input->search-bar#send",
+                          search_bar_target: "input" ,
+                          }%>
+    <% end %>
 
-<%= form_with(url: vinyls_path, method: "get", data: { search_bar_target: "form" }) do %>
-  <%= text_field_tag :query,
-                      params[:query],
-                      placeholder: "Rechercher un vinyl...",
-                      data: {
-                      action: "input->search-bar#send",
-                      search_bar_target: "input"
-                      }%>
-<% end %>
-
- <div data-search-bar-target="results">
-    <%= render "vinyls/index", vinyls: @vinyls %>
+    <div data-search-bar-target="results">
+        <%= render "vinyls/index", vinyls: @vinyls %>
+      </div>
+    </div>
   </div>
-</div>
+</body>

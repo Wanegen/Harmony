@@ -20,8 +20,14 @@ class VinylsController < ApplicationController
     discogs_vinyl = DiscogsApiService.new.search(@vinyl)
     @vinyl.title = discogs_vinyl.title
     @vinyl.genre = discogs_vinyl.genre.join('')
-    @vinyl.country = discogs_vinyl.country
+    @vinyl.year = discogs_vinyl.year
+    # On récupère également la resource_url pour avoir accès à une autre URL que l'on parse.
     @vinyl.resource_url = discogs_vinyl.resource_url
+    # On parse l'autre URL (main_release) pour récupérer la tracklist.
+    @main_release_url = discogs_vinyl.main_release_url
+    # On affiche la tracklist dans la vue show.
+    discogs_service = DiscogsApiService.new
+    @tracklist = discogs_service.fetch_tracklist(@main_release_url)
     @vinyl.save
   end
 

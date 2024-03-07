@@ -1,24 +1,38 @@
-<h1>Résultat de la recherche :</h1>
-<%= @vinyl.title %>
-<%= @vinyl.genre %>
-<%= @vinyl.country %>
-<%= @vinyl.resource_url %>
-
-
-
-
-
-<div class="vinyl">
-  <div class="vinyl-title">
-    <%= @vinyl.title %>
+<body class="bg-black min-h-screen flex justify-center items-center">
+  <div class="text-center grid grid-cols-1 gap-4 overflow-auto p-8"> <!-- Utilisez CSS Grid avec une seule colonne -->
+    <h1 class="text-2xl font-bold m-8 text-white">Nouveau vinyl ajouté !</h1>
+    <div class="flex flex-col items-center">
+      <div class="flex">
+        <span class="font-bold text-white">Album & Artiste :</span>
+        <span class="text-white ml-2 text-center"><%= @vinyl.title %></span>
+      </div>
+      <div class="flex">
+        <span class="font-bold text-white">Paru en :</span>
+        <span class="text-white ml-2 text-center"><%= @vinyl.year %></span>
+      </div>
+      <div class="flex">
+        <span class="font-bold text-white">Genre :</span>
+        <span class="text-white ml-2 text-center"><%= @vinyl.genre %></span>
+      </div>
+      <div class="flex">
+        <% if @tracklist.present? %>
+          <div class="flex flex-col">
+            <span class="font-bold text-white mb-2 text-center">Tracklist :</span>
+            <div class="text-white mb-4 text-center">
+              <ul class="mb-8">
+                <% @tracklist.each_with_index do |track, index| %>
+                  <li><%= index + 1 %> . <%= track['title']%></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% else %>
+          <p class="text-white mb-4 text-center">Aucune piste sur cet album.</p>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to 'Retourner à la bibliothèque', vinyls_path, class: "m8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
+      </div>
+    </div>
   </div>
-  <div class="vinyl-artist">
-    <%= @vinyl.artist_name %>
-  </div>
-  <div class="vinyl-year">
-    <%= @vinyl.year %>
-  </div>
-<div class="btn">
-<%= link_to 'Retourner à la bibliothèque', vinyls_path%>
-</div>
-</div>
+</body>
