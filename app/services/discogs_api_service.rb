@@ -21,35 +21,37 @@ class DiscogsApiService < ApplicationService
 
     return unless main_release_url
 
-    # @tracklist = fetch_tracklist(main_release_url)
+    @tracklists = fetch_tracklist(main_release_url)
+
     @album_name = fetch_album_name(main_release_url)
     @artist_name = fetch_artist_name(main_release_url)
 
     vinyl.update(
-      # tracklist: @tracklist,
       title: @album_name,
       artist_name: @artist_name
     )
+    @tracklists.each do |track|
+      Tracklist.create(vinyl: vinyl, title: track["title"], duration: track["duration"], position: track["position"])
+    end
   end
 
-  # def fetch_tracklist(main_release_url)
-  #   # Effectuer la requête HTTP pour récupérer les données JSON
-  #   uri = URI.parse(main_release_url)
-  #   http = Net::HTTP.new(uri.host, uri.port)
-  #   http.use_ssl = true if uri.scheme == 'https'
-  #   request = Net::HTTP::Get.new(uri)
-  #   response = http.request(request)
-  #   if response.code == '200'
-  #     # Parser les données JSON
-  #     data = JSON.parse(response.body)
 
-  #     # Extraction de la tracklist
-  #     data['tracklist']
-  #   else
-  #     puts "La requête a échoué avec le code : #{response.code}"
-  #     return nil
-  #   end
-  # end
+  def fetch_tracklist(main_release_url)
+    # Effectuer la requête HTTP pour récupérer les données JSON
+    uri = URI.parse(main_release_url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true if uri.scheme == 'https'
+    request = Net::HTTP::Get.new(uri)
+    response = http.request(request)
+    if response.code == '200'
+      # Parser les données JSON
+      data = JSON.parse(response.body)
+      data['tracklist']
+    else
+      puts "La requête a échoué avec le code : #{response.code}"
+      return nil
+    end
+  end
 
   def fetch_album_name(main_release_url)
     # Effectuer la requête HTTP pour récupérer les données JSON
