@@ -4,24 +4,32 @@ class DiscogsApiService < ApplicationService
     @auth_wrapper = Discogs::Wrapper.new('Harmony', user_token: ENV['DISCOGS_TOKEN'])
   end
 
-  def search(vinyl)
+  def update_vinyl_infos(vinyl)
     discogs_vinyl = @auth_wrapper.search(
-      vinyl.release_title,
+      vinyl.title,
       artist: vinyl.artist_name,
-      year: vinyl.year,
-      genre: vinyl.genre,
-      resource_url: vinyl.resource_url
+      year: vinyl.year
     ).results.first
 
-    # Vérifier si discogs_vinyl n'est pas nil pour éviter les erreurs
-    if discogs_vinyl
-      # Récupérer la main_release_url à partir de la resource_url
-      main_release_url = fetch_main_release_url(discogs_vinyl.resource_url)
+    return unless discogs_vinyl
 
-      # Ajouter la main_release_url aux données discogs_vinyl
-      discogs_vinyl.main_release_url = main_release_url if main_release_url
-    end
-    return discogs_vinyl
+    resource_url = discogs_vinyl.resource_url
+
+    return unless resource_url
+
+    main_release_url = fetch_main_release_url(resource_url)
+
+    return unless main_release_url
+
+    @tracklist = fetch_tracklist(main_release_url)
+    @album_name = fetch_album_name(main_release_url)
+    @artist_name = fetch_artist_name(main_release_url)
+
+    vinyl.update(
+      tracklist: @tracklist,
+      title: @album_name,
+      artist_name: @artist_name
+    )
   end
 
   def fetch_tracklist(main_release_url)
@@ -34,6 +42,7 @@ class DiscogsApiService < ApplicationService
     if response.code == '200'
       # Parser les données JSON
       data = JSON.parse(response.body)
+
       # Extraction de la tracklist
       data['tracklist']
     else

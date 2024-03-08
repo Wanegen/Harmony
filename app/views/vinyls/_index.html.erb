@@ -3,7 +3,7 @@
     <% @vinyls.each do |vinyl| %>
       <div class="flex content-center items-center flex-col m-8">
         <div class="flex flex-col border border-yellow-500 rounded-lg p-4 flex-grow">
-          <span class="font-bold text-white flex-grow"><%= vinyl.release_title %></span>
+          <span class="font-bold text-white flex-grow"><%= vinyl.title %></span>
           <span class="text-white mb-3 flex-grow mt-0"><%= vinyl.artist_name %></span>
           <%= link_to "Voir l'album", vinyl_path(vinyl), class: "w-24 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-sm text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
         </div>

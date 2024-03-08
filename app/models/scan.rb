@@ -1,10 +1,10 @@
 class Scan < ApplicationRecord
   has_one_attached :image
 
-  def release_title
+  def title
     return unless ai_response
 
-    ai_response['release_title']
+    ai_response['title']
   end
 
   def artist_name

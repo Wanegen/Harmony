@@ -1,11 +1,11 @@
 class Vinyl < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search,
-  against: [:release_title, :artist_name],
+  against: [:title, :artist_name],
   using: {
     tsearch: { prefix: true }
   }
   belongs_to :user
-  validates :release_title, :artist_name, :year, presence: true
+  validates :title, :artist_name, :year, presence: true
   has_one_attached :cover
 end
