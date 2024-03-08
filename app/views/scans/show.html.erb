@@ -1,26 +1,30 @@
+<body class="bg-black h-screen flex justify-center items-center">
+  <div class="text-center">
 
-<div class="container scan"
-  data-controller="scan-subscription"
-  data-scan-subscription-scan-id-value="<%= @scan.id %>"
-  >
+    <h1 class="text-2xl font-bold m-8 text-white">Est-ce bien l'album que vous recherchez ?</h1>
+    <div class="flex flex-col items-center">
+      <div class="flex mt-8">
+        <span class="font-bold text-white">Titre de l'album :</span>
+        <span class="text-white ml-2 text-center"><%= @scan&.title %></span>
+      </div>
+      <div class="flex">
+        <span class="font-bold text-white">Artiste :</span>
+        <span class="text-white ml-2 text-center"><%= @scan&.artist_name %></span>
+      </div>
+      <div class="flex mb-8">
+        <span class="font-bold text-white">Paru en :</span>
+        <span class="text-white ml-2 text-center"><%= @scan&.year %></span>
+      </div>
+    </div>
 
-  <h1>Résultat de la recherche :</h1>
-  <div class="scan" data-scan-subscription-target="scans">
-    <%= @scan&.title %>
-    <%= @scan&.year %>
-    <%= @scan&.artist_name %>
+    <%= form_with model: @vinyl do |f| %>
+
+      <%= f.hidden_field :title, value: @scan.title %>
+      <%= f.hidden_field :artist_name, value: @scan.artist_name %>
+      <%= f.hidden_field :year, value: @scan.year %>
+
+      <%= f.submit "Valider", class: "mt-8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
+
+    <% end %>
   </div>
-</div>
-
-
-
-<%= form_with model: @vinyl do |f| %>
-
-  <%= f.hidden_field :title, value: @scan.title %>
-  <%= f.hidden_field :artist_name, value: @scan.artist_name %>
-  <%= f.hidden_field :year, value: @scan.year %>
-
-  <%= f.submit "Valider", class: "block w-40 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %>
-
-<% end %>
-
+</body>
