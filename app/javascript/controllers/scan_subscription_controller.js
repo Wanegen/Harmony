@@ -7,21 +7,28 @@ export default class extends Controller {
   static targets = ["scans"];
 
   connect() {
-    console.log("coucou");
-    console.log(this.scanIdValue);
     this.channel = createConsumer().subscriptions.create(
       {
         channel: "ScanChannel",
         id: this.scanIdValue,
       },
       {
-        received: (data) => this.displayScan(data),
-        connected: () => console.log("connected"),
+        // received: data =>
+        received: data => this.displayScan(data)
       }
     );
-    console.log(this.channel);
   }
   displayScan(data) {
     console.log(data);
+    const scan = data.scan.ai_response;
+
+    const partial = `
+      <h2>${scan.title}</h2>
+      <p>
+        ${scan.artist_name}
+      </p>
+      <p>${scan.year}</p>`
+console.log(partial);
+this.scansTarget.insertAdjacentHTML("beforeend", partial)
   }
 }

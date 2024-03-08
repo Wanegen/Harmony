@@ -1,5 +1,7 @@
 class CreateScanJob < ApplicationJob
   queue_as :default
+  # include ActionView::Rendering
+  # include Rails.application.routes.url_helpers
 
   def perform(scan_id)
     scan = Scan.find(scan_id)
@@ -13,7 +15,7 @@ class CreateScanJob < ApplicationJob
     }
 
     if scan.save
-      ScanChannel.broadcast_to(scan, { scan: scan, status: "started" })
+      ScanChannel.broadcast_to(scan, { scan: scan })
     end
   end
 end
