@@ -9,6 +9,9 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <%= javascript_include_tag 'https://sdk.scdn.co/spotify-player.js' %>
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
