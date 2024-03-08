@@ -28,7 +28,8 @@ export default class extends Controller {
         ${scan.artist_name}
       </p>
       <p>${scan.year}</p>`
-console.log(partial);
-this.scansTarget.insertAdjacentHTML("beforeend", partial)
+
+    console.log(partial);
+    this.scansTarget.insertAdjacentHTML("beforeend", partial)
   }
 }
