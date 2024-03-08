@@ -22,6 +22,7 @@ class DiscogsApiService < ApplicationService
     return unless main_release_url
 
     @tracklists = fetch_tracklist(main_release_url)
+
     @album_name = fetch_album_name(main_release_url)
     @artist_name = fetch_artist_name(main_release_url)
 
@@ -29,11 +30,11 @@ class DiscogsApiService < ApplicationService
       title: @album_name,
       artist_name: @artist_name
     )
+    @tracklists.each do |track|
+      Tracklist.create(vinyl: vinyl, title: track["title"], duration: track["duration"], position: track["position"])
+    end
   end
 
-  @tracklists.each do |track|
-    Tracklist.create(vinyl: vinyl, title: track["title"], duration: track["duration"], position: track["position"])
-  end
 
   def fetch_tracklist(main_release_url)
     # Effectuer la requête HTTP pour récupérer les données JSON
@@ -45,8 +46,6 @@ class DiscogsApiService < ApplicationService
     if response.code == '200'
       # Parser les données JSON
       data = JSON.parse(response.body)
-
-      # Extraction de la tracklist
       data['tracklist']
     else
       puts "La requête a échoué avec le code : #{response.code}"

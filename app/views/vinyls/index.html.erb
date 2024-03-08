@@ -7,6 +7,7 @@
       <%= text_field_tag :query,
                           params[:query],
                           placeholder: "Rechercher un vinyl...",
+                          class: "px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 text-gray-900",
                           data: {
                           action: "input->search-bar#send",
                           search_bar_target: "input" ,
