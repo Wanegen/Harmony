@@ -11,21 +11,14 @@ class ScansController < ApplicationController
   def create
     @scan = Scan.new(scan_params)
     @scan.save!
-
-    chaptgpt_response = GptApiImageCallService.call(@scan) # background job
-
-    puts '🎂 -----'
-    p chaptgpt_response
-
-    @infos = chaptgpt_response['choices'][0]['message']['content'].split(',').map(&:strip)
-    p @infos
-    @scan.ai_response = {
-      title: @infos[0],
-      year: @infos[1],
-      artist_name: @infos[2]
-    }
-
-    @scan.save!
+    puts "✅✅✅✅✅✅✅✅"
+    puts @scan.id
+    puts "✅✅✅✅✅✅✅✅"
+    CreateScanJob.perform_later(@scan.id)
+    # else
+    # flash[:alert] = "Something went wrong"
+    # render :new
+    # end
 
     redirect_to scan_path(@scan)
   end
