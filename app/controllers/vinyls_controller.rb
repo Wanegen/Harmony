@@ -4,7 +4,7 @@ class VinylsController < ApplicationController
       @vinyls = Vinyl.search(params[:query])
      #params[:query] = nil
     else
-      @vinyls = Vinyl.all
+      @vinyls = Vinyl.all.order(created_at: :desc)
     end
 
     respond_to do |format|
@@ -17,12 +17,9 @@ class VinylsController < ApplicationController
 
   def show
     @vinyl = Vinyl.find(params[:id])
-    discogs_vinyl = DiscogsApiService.new.search(@vinyl)
-    @vinyl.title = discogs_vinyl.title
-    @vinyl.genre = discogs_vinyl.genre.join('')
-    @vinyl.country = discogs_vinyl.country
-    @vinyl.resource_url = discogs_vinyl.resource_url
-    @vinyl.save
+    # On récupère également la resource_url pour avoir accès à une autre URL que l'on parse.
+    # On parse l'autre URL (main_release) pour récupérer la tracklist.
+    # On affiche la tracklist dans la vue show.
   end
 
   def new
@@ -33,6 +30,7 @@ class VinylsController < ApplicationController
     @vinyl = Vinyl.new(vinyl_params)
     @vinyl.user = User.first ## bien changer en current_user
     @vinyl.save!
+    DiscogsApiService.new.update_vinyl_infos(@vinyl)
 
     redirect_to vinyl_path(@vinyl)
   end
