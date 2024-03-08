@@ -9,9 +9,9 @@
 
     <%= form_with model: @vinyl do |f| %>
 
-      <%= f.hidden_field :title, value: @scan.title %>
-      <%= f.hidden_field :artist_name, value: @scan.artist_name %>
-      <%= f.hidden_field :year, value: @scan.year %>
+      <%= f.hidden_field :title, value: @scan.title, data: { scan_subscription_target: "vinylTitle" } %>
+      <%= f.hidden_field :artist_name, value: @scan.artist_name, data: { scan_subscription_target: "vinylArtistName" } %>
+      <%= f.hidden_field :year, value: @scan.year, data: { scan_subscription_target: "vinylYear" } %>
 
       <%= f.submit "Valider", class: "mt-8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
 
