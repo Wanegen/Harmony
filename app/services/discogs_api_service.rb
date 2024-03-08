@@ -21,15 +21,18 @@ class DiscogsApiService < ApplicationService
 
     return unless main_release_url
 
-    @tracklist = fetch_tracklist(main_release_url)
+    @tracklists = fetch_tracklist(main_release_url)
     @album_name = fetch_album_name(main_release_url)
     @artist_name = fetch_artist_name(main_release_url)
 
     vinyl.update(
-      tracklist: @tracklist,
       title: @album_name,
       artist_name: @artist_name
     )
+  end
+
+  @tracklists.each do |track|
+    Tracklist.create(vinyl: vinyl, title: track["title"], duration: track["duration"], position: track["position"])
   end
 
   def fetch_tracklist(main_release_url)
