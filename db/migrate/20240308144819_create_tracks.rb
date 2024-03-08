@@ -1,6 +1,6 @@
-class CreateTracklists < ActiveRecord::Migration[7.1]
+class CreateTracks < ActiveRecord::Migration[7.1]
   def change
-    create_table :tracklists do |t|
+    create_table :tracks do |t|
       t.string :title
       t.string :duration
       t.string :position
