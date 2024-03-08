@@ -22,7 +22,7 @@
         <% if @tracklist.present? %>
           <div class="flex flex-col">
             <span class="font-bold text-white mb-2 text-center">Tracklist :</span>
-            <div class="text-white mb-4 text-center">
+            <div class="text-white mb-4 text-center" data-controller="spotify" data-spotify-target="tracklist">
               <ul class="mb-8">
                 <% @tracklist.each_with_index do |track, index| %>
                   <li><%= index + 1 %> . <%= track['title']%></li>

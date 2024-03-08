@@ -67,4 +67,15 @@ Vinyl.create(
   user: u
 )
 
+
+Vinyl.create(
+title: "The Wall",
+artist_name: "Pink Floyd",
+year: 1979,
+user: u,
+genre: "Rock",
+country: "UK",
+tracklist: ["In the Flesh?", "The Thin Ice"]
+)
 puts "Vinyls generated!"
+
