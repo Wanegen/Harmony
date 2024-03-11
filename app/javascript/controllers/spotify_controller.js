@@ -2,34 +2,34 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="spotify"
 export default class extends Controller {
-  static targets = ["tracklist"];
+  static targets = ["tracks"];
   connect() {
-  // console.log("Connected to Spotify controller");
+  console.log("Connected to Spotify controller");
+  this.initializeplayer();
 }
+// playTrack(event) {
+//   const trackURI = event.currentTarget.dataset.trackUri;
+//   console.log("Lecture de la piste :", trackURI);
 
-playTrack(event) {
-  const trackURI = event.currentTarget.dataset.trackUri;
-  this.player.pause();
-  this.player.play({ uris: [trackURI] });
-}
-
-get player() {
-  if (this.player) {
+initializeplayer() {
+  window.onSpotifyWebPlaybackSDKReady = () => {
     const myToken = ENV['SPOTIFY_TOKEN'];
-    this.player = new Spotify.Player({
-      name: 'Track player',
+    const player = new Spotify.Player({
+      name: 'Player',
       getOAuthToken: cb => { cb(myToken); },
-    
     });
 
-    this.player.connect().then(success => {
+
+    player.connect().then(success => {
       if (success) {
         console.log('Connected to Spotify Web Playback SDK');
       }
     }).catch(error => {
       console.error('Failed to connect to Spotify Web Playback SDK', error);
     });
-  }
-  return this.player;
-}
-};
+
+    player.addListener('ready', ({ device_id }) => {
+      console.log('Connecté avec', device_id);
+
+  });}
+}};
