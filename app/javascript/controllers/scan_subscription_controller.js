@@ -4,7 +4,7 @@ import { createConsumer } from "@rails/actioncable";
 // Connects to data-controller="scan-subscription"
 export default class extends Controller {
   static values = { scanId: Number };
-  static targets = ["scans", "vinylTitle", "vinylArtistName", "vinylYear"];
+  static targets = ["scans", "vinylTitle", "vinylArtistName", "vinylYear", "submitBtn"];
 
   connect() {
     this.channel = createConsumer().subscriptions.create(
@@ -30,9 +30,10 @@ export default class extends Controller {
       <p>${scan.year}</p>`
 
     console.log(partial);
-    this.scansTarget.insertAdjacentHTML("beforeend", partial)
+    this.scansTarget.innerHTML = partial;
     this.vinylTitleTarget.value = scan.title;
     this.vinylArtistNameTarget.value = scan.artist_name;
     this.vinylYearTarget.value = scan.year;
+    this.submitBtnTarget.disabled = false;
   }
 }
