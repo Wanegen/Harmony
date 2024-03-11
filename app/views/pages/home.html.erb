@@ -2,11 +2,11 @@
 
 <div class="text-center">
   <h1 class="text-4xl font-bold m-7 text-white">
-        Scan your vinyl
+        Scannez votre vinyl
   </h1>
   <%= form_with model: @scan do |form| %>
     <%= form.file_field :image, class: "flex-row mb-4 items-center content-centermb-2 text-sm font-medium text-gray-900 text-white" %>
-    <%= form.submit "Search", class:"w-40 h-10 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-white focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"%>
+    <%= form.submit "Scanner", class:"w-40 h-10 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-white focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"%>
   <% end %>
 </div>
 
