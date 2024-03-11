@@ -2,8 +2,9 @@
   <div class="text-center grid grid-cols-1 gap-4 overflow-auto p-8"> <!-- Utilisez CSS Grid avec une seule colonne -->
     <h1 class="text-2xl font-bold m-8 text-white">Mon vinyl</h1>
     <div class="flex flex-col items-center">
-      <div class="flex">
-        <img src="<%= @vinyl.image %>" alt="" class="w-60 h-60">
+      <div class="flex poster" style="display: flex;align-content: center;vertical-align: center;justify-content: center;position: relative;">
+        <span id="dot" style="position: absolute; z-index: 1;"></span>
+        <img class="vinyl w-60 h-60" src="<%= @vinyl.image %>" alt="" class="vinyl w-60 h-60">
       </div>
       <div class="flex">
         <span class="font-bold text-white">Nom de l'album :</span>
@@ -39,8 +40,12 @@
         <% end %>
       </div>
       <div>
+        <%= link_to 'Supprimer le vinyl', vinyl_path(@vinyl), data: {turbo_method: :delete, turbo_confirm: 'Êtes vous sûr.e ?'}, class: "m8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
+      </div>
+      <div>
         <%= link_to 'Retourner à la bibliothèque', vinyls_path, class: "m8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
       </div>
+
     </div>
   </div>
 </body>

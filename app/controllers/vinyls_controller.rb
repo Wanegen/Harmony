@@ -1,6 +1,6 @@
 class VinylsController < ApplicationController
   def index
-    @filters = Vinyl.where.not(genre: nil).map(&:genre).uniq
+    @filters = Vinyl.where.not(genres: nil).map(&:genres).uniq
 
     if params[:query].present?
       @vinyls = Vinyl.search(params[:query])
@@ -9,8 +9,8 @@ class VinylsController < ApplicationController
       @vinyls = Vinyl.all.order(created_at: :desc)
     end
 
-    if params[:genre].present?
-      @vinyls = @vinyls.where(genre: params[:genre])
+    if params[:genres].present?
+      @vinyls = @vinyls.where(genres: params[:genres])
     end
 
     respond_to do |format|
@@ -46,7 +46,7 @@ class VinylsController < ApplicationController
     @vinyl.destroy
 
     redirect_to vinyls_path
-    @vinyls = Discogs::Wrapper.all
+    # @vinyls = Discogs::Wrapper.all
   end
 
   private

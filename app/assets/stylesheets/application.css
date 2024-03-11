@@ -13,3 +13,42 @@
  *= require_tree .
  *= require_self
  */
+
+ .loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: #FF3D00;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.yellow-btn:disabled {
+ opacity: 0.5;
+ cursor: not-allowed;
+}
+
+.vinyl {
+  border-radius: 9999999px;
+  animation: rotation 10s infinite linear;
+}
+
+#dot {
+  width: 2rem;
+  height: 2rem;
+  background-color: black;
+  top: 6.5rem;
+  border-radius: 999999px;
+}
