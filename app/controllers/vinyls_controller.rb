@@ -1,10 +1,16 @@
 class VinylsController < ApplicationController
   def index
+    @filters = Vinyl.where.not(genre: nil).map(&:genre).uniq
+
     if params[:query].present?
       @vinyls = Vinyl.search(params[:query])
      #params[:query] = nil
     else
       @vinyls = Vinyl.all.order(created_at: :desc)
+    end
+
+    if params[:genre].present?
+      @vinyls = @vinyls.where(genre: params[:genre])
     end
 
     respond_to do |format|
