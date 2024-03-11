@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   #     mount Sidekiq::Web => '/sidekiq'
   # end
 
+  get "authenticate", to: "pages#authenticate"
+  get "callback", to: "pages#callback"
 end
