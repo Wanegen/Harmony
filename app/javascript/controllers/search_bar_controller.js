@@ -9,7 +9,7 @@ export default class extends Controller {
   }
 
 send() {
-  // console.log(e vent);
+  // console.log(event);
   const input = this.inputTarget.value
   // console.log(input);
   const baseUrl = this.formTarget.action
