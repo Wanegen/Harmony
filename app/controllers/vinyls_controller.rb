@@ -49,6 +49,10 @@ class VinylsController < ApplicationController
     # @vinyls = Discogs::Wrapper.all
   end
 
+  def tracks
+    JSON.parse(tracklist)
+  end
+
   private
 
   def vinyl_params
