@@ -42,7 +42,13 @@ class DiscogsApiService < ApplicationService
       tracklist: @tracks
     )
     @tracks.each do |track|
-      Track.create(vinyl: vinyl, title: track['title'], duration: track['duration'], position: track['position'])
+      Track.create(
+        vinyl: vinyl,
+        title: track['title'],
+        duration: track['duration'],
+        position: track['position'],
+        preview_url: SpotifyService.new(vinyl).fetch_preview_url({title: track['title'], artist_name: @artist_name})
+      )
     end
   end
 

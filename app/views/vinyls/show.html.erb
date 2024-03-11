@@ -26,19 +26,14 @@
         <% if @vinyl.tracks.present? %>
           <div class="flex flex-col">
             <span class="font-bold text-white mb-2 text-center">Tracklist :</span>
-            <div class="text-white mb-4 text-center"  data-spotify-target="tracks">
+            <div class="text-white mb-4 text-center">
               <ul class="mb-8">
                 <% @vinyl.tracks.each_with_index do |track, index| %>
                   <li><%= index + 1 %> . <%= track['title']%></li>
-                  <% if track['preview_url'].present? %>
-              <audio controls>
-                <source src="<%= track['preview_url'] %>" type="audio/mpeg">
-                Your browser does not support the audio element.
-              </audio>
-            <% else %>
-              <p>No preview available</p>
-            <% end %>
-                  <button data-action="click->spotify#playTrack" data-track-uri="<%= track['uri'] %>">Lire</button>
+                  <audio controls>
+                  <source src="<%= track['preview_url'] %>" type="audio/mpeg">
+                      Your browser does not support the audio element.
+                  </audio>
                   </li>
                 <% end %>
               </ul>
