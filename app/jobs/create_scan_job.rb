@@ -11,11 +11,11 @@ class CreateScanJob < ApplicationJob
     scan.ai_response = {
       title: infos[0],
       year: infos[1],
-      artist_name: infos[2],
+      artist_name: infos[2]
     }
 
-    if scan.save
-      ScanChannel.broadcast_to(scan, { scan: scan })
-    end
+    return unless scan.save
+
+    ScanChannel.broadcast_to(scan, { scan: scan })
   end
 end

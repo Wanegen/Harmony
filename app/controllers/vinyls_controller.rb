@@ -41,7 +41,6 @@ class VinylsController < ApplicationController
     redirect_to vinyl_path(@vinyl)
   end
 
-
   def destroy
     @vinyl = Vinyl.find(params[:id])
     @vinyl.destroy
@@ -50,10 +49,9 @@ class VinylsController < ApplicationController
     @vinyls = Discogs::Wrapper.all
   end
 
-
   private
 
   def vinyl_params
-    params.require(:vinyl).permit(:title, :artist_name, :year)
+    params.require(:vinyl).permit(:title, :artist_name, :year, :genres)
   end
 end
