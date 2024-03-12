@@ -27,11 +27,11 @@
 
 @keyframes rotation {
   0% {
-    transform: rotate(0deg);
+    rotate: 0deg;
   }
 
   100% {
-    transform: rotate(360deg);
+    rotate: 360deg;
   }
 }
 
@@ -41,9 +41,12 @@
 }
 
 .vinyl {
-  border-radius: 9999999px;
-  animation: rotation 10s infinite linear;
+  border-radius: 999px;
+  animation: rotation 10s infinite linear forwards;
+  animation-delay: 1s;
 }
+
+
 
 #dot {
   width: 2rem;
