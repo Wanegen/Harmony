@@ -1,0 +1,30 @@
+<div class="flex flex-col justify-center items-center text-center">
+  <img src="<%= asset_path('illu-woman.svg') %>" alt="femme-musique">
+  <div class="flex flex-col justify-center">
+    <h2 class="font-scto text-lg text-white tracking-wide mb-1"> Comme qui dirait... </h2>
+    <h1 class="font-tuskerGrotesk font-medium text-4xl text-white tracking-wider mb-8"> On connait <br> la chanson ! </h1>
+  </div>
+  <div class="w-72">
+    <div class="flex items-start p-4 mb-5 border border-red rounded-xl">
+      <img src="<%= asset_path('album_name_scan.svg') %>" alt="nom_album">
+      <div class="text-start pl-3">
+        <h3 class="pt-1 font-tuskerGrotesk font-medium text-red tracking-widest">NOM DE L'ALBUM</h3>
+        <h2 class="font-scto text-lg text-white tracking-wide"><%= scan.title %></h2>
+      </div>
+    </div>
+    <div class="flex items-start p-4 mb-5 border border-red rounded-xl">
+      <img src="<%= asset_path('artist_name_scan.svg') %>" alt="nom_artiste">
+      <div class="text-start pl-3">
+        <h3 class="font-tuskerGrotesk font-medium text-red tracking-widest pt-1">NOM DE L'ARTISTE</h3>
+        <h2 class="font-scto text-lg text-white tracking-wide"><%= scan.artist_name %></h2>
+      </div>
+    </div>
+    <div class="flex items-start p-4 border border-red rounded-xl">
+      <img src="<%= asset_path('paru_scan.svg') %>" alt="paru_en">
+      <div class="text-start pl-3">
+        <h3 class="font-tuskerGrotesk font-medium text-red tracking-widest pt-1">SORTIE</h3>
+        <h2 class="font-scto text-lg text-white tracking-wide"><%= scan.year %></h2>
+      </div>
+    </div>
+  </div>
+</div>
