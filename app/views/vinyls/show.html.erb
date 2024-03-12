@@ -1,10 +1,10 @@
-<body class="bg-black min-h-screen flex justify-center items-center" data-controller="spotify">
+<body class="bg-black min-h-screen flex justify-center items-center" data-controller="spotify music">
   <div class="text-center grid grid-cols-1 gap-4 overflow-auto p-8"> <!-- Utilisez CSS Grid avec une seule colonne -->
     <h1 class="text-2xl font-bold m-8 text-white">Mon vinyl</h1>
     <div class="flex flex-col items-center">
-      <div class="flex poster" style="display: flex;align-content: center;vertical-align: center;justify-content: center;position: relative;">
+      <div class="flex poster" style="display: flex; align-content: center; vertical-align: center; justify-content: center; position: relative;">
         <span id="dot" style="position: absolute; z-index: 1;"></span>
-        <img class="vinyl w-60 h-60" src="<%= @vinyl.image %>" alt="" class="vinyl w-60 h-60">
+        <img class="vinyl w-60 h-60" src="<%= @vinyl.image %>" alt="" class="vinyl w-60 h-60" data-music-target="vinyl" data-action="mousemove->music#scratch">
       </div>
       <div class="flex">
         <span class="font-bold text-white">Nom de l'album :</span>
@@ -18,7 +18,6 @@
         <span class="font-bold text-white">Paru en :</span>
         <span class="text-white ml-2 text-center"><%= @vinyl.year %></span>
       </div>
-
       <div class="flex">
         <span class="font-bold text-white">Genre :</span>
         <span class="text-white ml-2 text-center"><%= @vinyl.genres %></span>
@@ -31,26 +30,24 @@
               <ul class="mb-8">
                 <% @vinyl.tracks.each_with_index do |track, index| %>
                   <li><%= index + 1 %> . <%= track['title']%></li>
-                  <audio controls>
-                  <source src="<%= track['preview_url'] %>" type="audio/mpeg">
-                      Your browser does not support the audio element.
+                  <audio controls data-music-target="audio" data-action="play->music#play pause->music#stop">
+                    <source src="<%= track['preview_url'] %>" type="audio/mpeg">
                   </audio>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
+                </li>
+              <% end %>
+            </ul>
           </div>
-        <% else %>
-          <p class="text-white mb-4 text-center">Aucune piste sur cet album.</p>
-        <% end %>
-      </div>
-      <div>
-        <%= link_to 'Supprimer le vinyl', vinyl_path(@vinyl), data: {turbo_method: :delete, turbo_confirm: 'Êtes vous sûr.e ?'}, class: "m8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
-      </div>
-      <div>
-        <%= link_to 'Retourner à la bibliothèque', vinyls_path, class: "m8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
-      </div>
-
+        </div>
+      <% else %>
+        <p class="text-white mb-4 text-center">Aucune piste sur cet album.</p>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to 'Supprimer le vinyl', vinyl_path(@vinyl), data: {turbo_method: :delete, turbo_confirm: 'Êtes vous sûr.e ?'}, class: "m8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
+    </div>
+    <div>
+      <%= link_to 'Retourner à la bibliothèque', vinyls_path, class: "m8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
     </div>
   </div>
+</div>
 </body>
