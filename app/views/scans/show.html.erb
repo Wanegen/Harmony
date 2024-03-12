@@ -1,22 +1,22 @@
-<div class="bg-black h-screen flex justify-center items-center"
+<div class="bg-dark h-screen flex flex-col justify-center items-center text-center"
      data-controller="scan-subscription"
      data-scan-subscription-scan-id-value="<%= @scan.id %>">
-  <div class="text-center">
-
-
-    <h1 class="text-2xl font-bold m-8 text-white">Résultat de la recherche :</h1>
-    <div class="text-white" data-scan-subscription-target="scans">
-      <span class="loader"></span>
+  <div class="text-white" data-scan-subscription-target="scans">
+    <span class="loader"></span>
+    <div class="flex flex-col justify-center items-center text-center">
+      <h1 class="mt-3 font-tuskerGrotesk font-medium text-4xl text-white tracking-wider"> Un peu de patience ! </h1>
+      <h2 class="font-scto text-lg text-white tracking-wide mb-6"> On digg aussi vite qu’on peut... </h2>
     </div>
+  </div>
+  <div>
+  <%= form_with model: @vinyl do |f| %>
 
-    <%= form_with model: @vinyl do |f| %>
+    <%= f.hidden_field :title, value: @scan.title, data: { scan_subscription_target: "vinylTitle" } %>
+    <%= f.hidden_field :artist_name, value: @scan.artist_name, data: { scan_subscription_target: "vinylArtistName" } %>
+    <%= f.hidden_field :year, value: @scan.year, data: { scan_subscription_target: "vinylYear" } %>
 
-      <%= f.hidden_field :title, value: @scan.title, data: { scan_subscription_target: "vinylTitle" } %>
-      <%= f.hidden_field :artist_name, value: @scan.artist_name, data: { scan_subscription_target: "vinylArtistName" } %>
-      <%= f.hidden_field :year, value: @scan.year, data: { scan_subscription_target: "vinylYear" } %>
+    <%= f.submit "Valider", data: { scan_subscription_target: "submitBtn" }, class: "mt-3 bg-red rounded-full p-2 pl-8 pr-8 text-md font-scto text-white", disabled: true %>
 
-      <%= f.submit "Valider", data: { scan_subscription_target: "submitBtn" }, class: "mt-8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 yellow-btn", disabled: true %>
-
-    <% end %>
+  <% end %>
   </div>
 </div>

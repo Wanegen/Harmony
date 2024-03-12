@@ -19,17 +19,10 @@ export default class extends Controller {
     );
   }
   displayScan(data) {
-    console.log(data);
+    console.log("pour etre sur");
     const scan = data.scan.ai_response;
 
-    const partial = `
-      <h2>${scan.title}</h2>
-      <p>
-        ${scan.artist_name}
-      </p>
-      <p>${scan.year}</p>`
-
-    console.log(partial);
+    const partial = data.html
     this.scansTarget.innerHTML = partial;
     this.vinylTitleTarget.value = scan.title;
     this.vinylArtistNameTarget.value = scan.artist_name;

@@ -16,6 +16,12 @@ class CreateScanJob < ApplicationJob
 
     return unless scan.save
 
-    ScanChannel.broadcast_to(scan, { scan: scan })
+    ScanChannel.broadcast_to(
+      scan,
+      {
+        scan: scan,
+        html: ApplicationController.render(partial: "scans/infos", locals: { scan: scan }, formats: :html)
+      }
+    )
   end
 end

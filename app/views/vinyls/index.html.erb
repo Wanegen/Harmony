@@ -1,29 +1,30 @@
 <div class="bg-dark min-h-screen flex justify-center items-center">
-  <div class="text-center grid grid-cols-1 gap-4 overflow-auto p-8 text-white">
+  <div class="text-center grid grid-cols-1 gap-4 overflow-auto p-8 text-dark">
     <div class="container" data-controller="search-bar">
-        <h1 class="text-2xl font-bold m-8 text-red">Bibliothèque</h1>
+        <h1 class="text-2xl font-tuskerGrotesk font-bold m-8 text-red">Bibliothèque</h1>
+          <%= form_with(url: vinyls_path, method: "get", data: { search_bar_target: "form" }) do %>
+            <%= text_field_tag :query,
+                                params[:query],
+                                placeholder: "Rechercher un vinyl...",
+                                class: "mb-3 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 text-gray-900",
+                                data: {
+                                action: "input->search-bar#send",
+                                search_bar_target: "input" ,
+                                }%>
+          <% end %>
+          <p class="font-scto text-white">Filtrer par genre</p>
+            <div class="overflow-x-scroll flex">
+              <%= link_to "Tous", request.params.except(:genres), class: "bg-white flex-none mt-5 mr-2 text-red font-scto py-2 px-3 rounded-full
+              #{"bg-red text-white" if params[:genres].nil?}"%>
+              <% @filters.each do |filter|%>
+              <%= link_to filter.capitalize, request.params.merge(genres: filter), class: "bg-white flex-none mt-5 mr-2 text-red font-scto py-2 px-3 rounded-full
+              #{"bg-red text-white" if params[:genres] == filter}"%>
+                <% end%>
+            </div>
 
-    <%= form_with(url: vinyls_path, method: "get", data: { search_bar_target: "form" }) do %>
-      <%= text_field_tag :query,
-                          params[:query],
-                          placeholder: "Rechercher un vinyl...",
-                          class: "px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 text-gray-900",
-                          data: {
-                          action: "input->search-bar#send",
-                          search_bar_target: "input" ,
-                          }%>
-    <% end %>
-      <div>
-          <% @filters.each do |filter|%>
-        <button class="overflow-x-scroll mt-2 text-red font-bold py-2 px-4 border rounded-full">
-            <%= link_to filter.capitalize, request.params.merge(genres: filter)%>
-        </button>
-          <% end%>
-      </div>
-
-    <div data-search-bar-target="results">
-        <%= render "vinyls/index", vinyls: @vinyls %>
-      </div>
+            <div data-search-bar-target="results">
+                <%= render "vinyls/index", vinyls: @vinyls %>
+            </div>
     </div>
   </div>
 </div>
