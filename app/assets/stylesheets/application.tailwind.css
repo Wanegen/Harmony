@@ -2,12 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
+@layer base {
+  @font-face {
+    font-family: "tusker-grotesk";
+    font-weight: 700;
+    src: url("TuskerGrotesk-7800Super.ttf") format("truetype");
+  }
 
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+  @font-face {
+    font-family: "tusker-grotesk";
+    font-weight: 500;
+    src: url("TuskerGrotesk-5700Bold.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "tusker-grotesk";
+    font-weight: 300;
+    src: url("TuskerGrotesk-4500Medium.ttf") format("truetype");
+  }
+
+  @font-face {
+    font-family: "scto-grotesk-a";
+    font-weight: 500;
+    src: url("Scto-Grotesk-A.ttf") format("truetype");
   }
 }
-
-*/

@@ -11,6 +11,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        tuskerGrotesk: ['tusker-grotesk'],
+        scto: ['scto-grotesk-a']
       },
     },
   },
