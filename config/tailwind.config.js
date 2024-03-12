@@ -15,6 +15,12 @@ module.exports = {
         scto: ['scto-grotesk-a']
       },
     },
+    colors: {
+      'white': '#FFFFFF',
+      'red': "#FF4C4C",
+      'dark-red': "#140000",
+      'dark': "#1B1B1B",
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),
