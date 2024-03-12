@@ -1,14 +1,17 @@
 <% if @vinyls.any? %>
   <div>
     <% @vinyls.each do |vinyl| %>
-      <div class="block px-4 py-2">
-        <div class="flex flex-col border border-yellow-500 rounded-lg p-4 flex-grow">
-          <span class="font-bold text-white flex-grow"><%= vinyl.title %></span>
-          <span class="text-red mb-3 flex-grow mt-0"><%= vinyl.artist_name %></span>
-          <span class="text-white mb-3 flex-grow mt-0"><%= vinyl.year %></span>
-          <% link_to "Voir l'album", vinyl_path(vinyl), class: "w-24 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-sm text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
+      <%= link_to vinyl_path(vinyl), class: "block px-4 py-2" do %>
+        <div class="bg-dark-red flex flex-row rounded-lg p-4 flex-grow">
+          <img class="rounded-full w-20 h-20" src="<%= vinyl.image %>" alt="">
+            <div class=" flex flex-col text-left ml-5">
+              <span class="mb-2 font-tuskerGrotesk font-medium text-white"><%= vinyl.title %></span>
+              <span class="text-red"><%= vinyl.artist_name %></span>
+              <span class="text-white font-scto"><%= vinyl.year %></span>
+            </div>
+
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 <% else %>
