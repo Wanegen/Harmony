@@ -14,6 +14,85 @@
  *= require_self
  */
 
+.fake-contour {
+  -webkit-text-stroke-width: 0.3px;
+  -webkit-text-stroke-color: #FF4747;
+ }
+
+ .scroller {
+  width: 100%;
+  overflow: hidden;
+ }
+
+ .div-scroller {
+  left: 0;
+  right: 0;
+  overflow: hidden;
+ }
+
+ .scroller-inner {
+  width: max-content;
+  flex-wrap: nowrap;
+  animation: scroll var(--_animation-duration, 40s)
+  var(--_animation-direction, forwards) linear infinite;
+}
+
+.scroller[data-direction="right"] {
+  --_animation-direction: reverse;
+}
+
+.scroller[data-direction="left"] {
+  --_animation-direction: forwards;
+}
+
+.scroller[data-speed="fast"] {
+  --_animation-duration: 20s;
+}
+
+.scroller[data-speed="slow"] {
+  --_animation-duration: 60s;
+}
+
+@keyframes scroll {
+  to {
+    transform: translate(calc(-50% - 0.5rem));
+  }
+}
+
+ audio::-webkit-media-controls-panel {
+  display: flex;
+  background-color: #FF4747;
+  flex-direction: row-reverse;
+  justify-content: end;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+}
+
+audio::-webkit-media-controls-play-button {
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+audio::-webkit-media-controls-current-time-display {
+  color: #FFFFFF;
+  text-shadow: none;
+}
+
+audio::-webkit-media-controls-timeline,
+audio::-webkit-media-controls-mute-button,
+audio::-webkit-media-controls-parameters,
+audio::-webkit-media-controls-time-remaining-display {
+  display: none;
+}
+
+/* audio {
+  border: 10px solid #FF4747;
+  border-radius: 5%;
+  background-color: #FF4747;
+} */
+
  .loader {
   width: 48px;
   height: 48px;

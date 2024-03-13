@@ -1,53 +1,71 @@
-<body class="bg-dark min-h-screen flex justify-center items-center" data-controller="spotify music">
-  <div class="text-center grid grid-cols-1 gap-4 overflow-auto p-8"> <!-- Utilisez CSS Grid avec une seule colonne -->
-    <h1 class="text-2xl font-bold m-8 text-white">Mon vinyl</h1>
-    <div class="flex flex-col items-center">
-      <div class="flex poster" style="display: flex; align-content: center; vertical-align: center; justify-content: center; position: relative;">
-        <span id="dot" style="position: absolute; z-index: 1;"></span>
-        <img class="vinyl w-60 h-60" src="<%= @vinyl.image %>" alt="" class="vinyl w-60 h-60" data-music-target="vinyl" data-action="mousemove->music#scratch">
+<div class="bg-dark flex flex-col justify-center items-center pb-20" data-controller="spotify music">
+  <div class="flex flex-col justify-start items-start w-full">
+    <%= link_to '← Retour', vinyls_path, class: "relative z-40 mt-10 ml-12 rounded-full p-2 pl-6 pr-6 text-md font-scto text-red border border-red" %>
+  </div>
+
+  <div class="flex flex-col items-center mt-12">
+    <div class="flex poster relative z-20" style="display: flex; align-content: center; vertical-align: center; justify-content: center; position: relative;">
+      <span id="dot" style="position: absolute; z-index: 10; top:85px"></span>
+      <img class="vinyl w-52 h-52" src="<%= @vinyl.image %>" alt="" class="vinyl w-60 h-60" data-music-target="vinyl" data-action="mousemove->music#scratch">
+    </div>
+    <div class="absolute z-0 top-28 div-scroller scale-150" data-controller="scroll-album-name-vinyl">
+      <div class="scroller" data-speed="fast">
+        <p class="scroller-inner pb-2 fake-contour uppercase font-tuskerGrotesk font-medium text-dark text-4xl mt-10 ml-6 mr-6">
+          <span><%= @vinyl.title %> - </span><span><%= @vinyl.title %> - </span><span><%= @vinyl.title %> - </span>
+        </p>
       </div>
-      <div class="flex">
-        <span class="font-bold text-white">Nom de l'album :</span>
-        <span class="text-white ml-2 text-center"><%= @vinyl.title %></span>
+      <div class="scroller" data-speed="fast" data-direction="right">
+        <p class="scroller-inner pb-2 fake-contour mr-20 uppercase font-tuskerGrotesk font-medium text-dark text-4xl">
+          <span><%= @vinyl.title %> - </span><span><%= @vinyl.title %> - </span><span><%= @vinyl.title %> - </span>
+        </p>
       </div>
-      <div class="flex">
-        <span class="font-bold text-white">Nom de l'artiste :</span>
-        <span class="text-white ml-2 text-center"><%= @vinyl.artist_name %></span>
+      <div class="scroller" data-speed="fast">
+        <p class="scroller-inner pb-2 fake-contour uppercase font-tuskerGrotesk font-medium text-dark text-4xl ml-6 mr-6">
+          <span><%= @vinyl.title %> - </span><span><%= @vinyl.title %> - </span><span><%= @vinyl.title %> - </span>
+        </p>
       </div>
-      <div class="flex">
-        <span class="font-bold text-white">Paru en :</span>
-        <span class="text-white ml-2 text-center"><%= @vinyl.year %></span>
+      <div class="scroller" data-speed="fast" data-direction="right">
+        <p class="scroller-inner pb-2 fake-contour mr-20 uppercase font-tuskerGrotesk font-medium text-dark text-4xl">
+          <span><%= @vinyl.title %> - </span><span><%= @vinyl.title %> - </span><span><%= @vinyl.title %> - </span>
+        </p>
       </div>
-      <div class="flex">
-        <span class="font-bold text-white">Genre :</span>
-        <span class="text-white ml-2 text-center"><%= @vinyl.genres %></span>
+      <div class="scroller" data-speed="fast">
+        <p class="scroller-inner fake-contour mr-20 uppercase font-tuskerGrotesk font-medium text-dark text-4xl">
+          <span><%= @vinyl.title %> - </span><span><%= @vinyl.title %> - </span><span><%= @vinyl.title %> - </span>
+        </p>
       </div>
-      <div class="flex">
-        <% if @vinyl.tracks.present? %>
+    </div>
+
+    <div class="flex flex-col justify-center text-center relative z-30">
+      <h1 class="font-tuskerGrotesk font-medium text-red text-4xl mt-4 ml-6 mr-6"><%= @vinyl.title %></h1>
+      <h3 class="font-tuskerGrotesk font-light text-white text-2xl mt-2"><%= @vinyl.artist_name %></h3>
+      <p class="font-scto text-red mt-1"><%= @vinyl.year %> - <%= @vinyl.genres %></p>
+    </div>
+
+    <div class="flex">
+      <% if @vinyl.tracks.present? %>
+        <div class="flex flex-col">
           <div class="flex flex-col">
-            <span class="font-bold text-white mb-2 text-center">Tracklist :</span>
-            <div class="text-white mb-4 text-center">
-              <ul class="mb-8">
-                <% @vinyl.tracks.each_with_index do |track, index| %>
-                  <li><%= index + 1 %> . <%= track['title']%></li>
-                  <audio controls data-music-target="audio" data-action="play->music#play pause->music#stop">
-                    <source src="<%= track['preview_url'] %>" type="audio/mpeg">
-                  </audio>
-                </li>
+            <span class="font-scto text-md font-bold text-white mt-10 mb-3 ml-5 text-left">On s'écoute ça ?</span>
+          </div>
+          <div class="text-white mb-4 text-center">
+            <ul class="mb-8 relative z-0">
+              <% @vinyl.tracks.each_with_index do |track, index| %>
+                <% truncated_title = track['title'].length > 16 ? "#{track['title'][0, 16]}..." : track['title'] %>
+                <li class="absolute z-10 ml-6 mt-4 font-scto"><%= index + 1 %> . <%= truncated_title %></li>
+                <audio class="mb-4" controls controlsList="nodownload noplaybackrate" data-music-target="audio" data-action="play->music#play pause->music#stop">
+                  <source src="<%= track['preview_url'] %>" type="audio/mpeg">
+                </audio>
               <% end %>
             </ul>
-          </div>
         </div>
-      <% else %>
-        <p class="text-white mb-4 text-center">Aucune piste sur cet album.</p>
-      <% end %>
-    </div>
-    <div>
-      <%= link_to 'Supprimer le vinyl', vinyl_path(@vinyl), data: {turbo_method: :delete, turbo_confirm: 'Êtes vous sûr.e ?'}, class: "m8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
-    </div>
-    <div>
-      <%= link_to 'Retourner à la bibliothèque', vinyls_path, class: "m8 w-40 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50" %>
-    </div>
+      </div>
+    <% else %>
+      <p class="text-white mb-4 text-center">Aucune piste sur cet album.</p>
+    <% end %>
+  </div>
+  <div class="flex flex-col justify-center text-center">
+    <%= link_to 'Supprimer cet album', vinyl_path(@vinyl), data: {turbo_method: :delete, turbo_confirm: 'Êtes vous sûr.e ?'}, class: "mr-1 mb-2 bg-dark border border-grey rounded-full p-2 pl-8 pr-8 font-scto text-grey" %>
   </div>
 </div>
-</body>
+</div>
