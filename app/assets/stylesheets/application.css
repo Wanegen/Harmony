@@ -46,6 +46,15 @@
   animation-delay: 1s;
 }
 
+#no-scrollbar {
+  scrollbar-width: none;
+}
+
+
+#no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 
 
 #dot {
