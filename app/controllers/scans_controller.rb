@@ -1,7 +1,6 @@
 class ScansController < ApplicationController
   def show
     @scan = Scan.find(params[:id])
-    @vinyl = Vinyl.new
   end
 
   def new

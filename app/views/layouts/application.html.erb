@@ -18,23 +18,34 @@
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-
     <%= yield %>
-    <nav class="fixed inset-x-0 bottom-0 bg-dark text-white">
-      <ul class="flex border-b-2 border-white">
-        <%= link_to root_path, class:"flex-grow" do %>
+    <nav class="fixed inset-x-0 bottom-0 bg-dark">
+      <ul class="flex">
+        <%= link_to root_path, class:"flex-grow #{ current_page?(root_path) || current_page?(scan_path(@scan.nil? ? Scan.first : @scan )) ? "border-b-2 border-white text-white" : "text-gray-400"}" do %>
           <li class="pt-4 pb-4 flex justify-center items-center p-2">
-            <img src="<%= asset_path('icon-scan-on.svg') %>" class="pr-2">
-            Scan
+            <% if current_page?(root_path) || current_page?(scan_path(@scan.nil? ? Scan.first : @scan )) %>
+              <img src="<%= asset_path('icon-scan-on.svg') %>" class="pr-2">
+              <p>Scan</p>
+            <% else %>
+              <img src="<%= asset_path('icon-scan-off.svg') %>" class="pr-2">
+              <p class="text-grey">Scan</p>
+            <% end %>
           </li>
         <% end %>
-        <%= link_to vinyls_path, class:"flex-grow" do %>
+        <%= link_to vinyls_path, class:"flex-grow #{ current_page?(vinyls_path)  || current_page?(vinyl_path(@vinyl.nil? ? Vinyl.first : @vinyl )) ? "border-b-2 border-white text-white" : "text-gray-400"}" do %>
           <li class="pt-4 pb-4 flex justify-center items-center p-2">
-            <img src="<%= asset_path('icon-bibli-on.svg') %>" class="pr-2">
-            Bibliothèque
+            <% if current_page?(vinyls_path)  || current_page?(vinyl_path(@vinyl.nil? ? Vinyl.first : @vinyl )) %>
+              <img src="<%= asset_path('icon-bibli-on.svg') %>" class="pr-2">
+              <p>Bibliothèque</p>
+            <% else %>
+              <img src="<%= asset_path('icon-bibli-off.svg') %>" class="pr-2">
+              <p class="text-grey">Bibliothèque</p>
+            <% end %>
           </li>
         <% end %>
       </ul>
     </nav>
+
+
   </body>
 </html>
