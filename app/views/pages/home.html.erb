@@ -1,13 +1,13 @@
-<div class="bg-dark h-screen flex flex-col justify-center items-center text-center ">
-  <img src= "<%= asset_path('illu1 1.svg') %>" alt="YourSVG" class="w-2/5  mb-12">
-  <h1 class="font-tuskerGrotesk text-white mt-5 mb-5">Préparez-vous à agrandir votre collection...</h1>
-  <p class="text-red mt-5">Scannez la pochette de votre vinyl</p>
+<div class="bg-dark h-screen flex flex-col items-center text-center">
+  <img src= "<%= asset_path('illu1 1.svg') %>" alt="YourSVG" class="w-6/12 mt-32 mb-5">
+  <h1 class="font-tuskerGrotesk font-normal text-white text-2xl tracking-wider">Préparez-vous à agrandir<br> votre collection...</h1>
   <%= form_with model: @scan, data: { controller: "scan" } do |form| %>
-    <div class="w-max border border-red rounded-full mt-2 mb-2">
+    <div class="border border-red rounded-full mt-10">
       <label for="scan_image">
-        <img src= "<%= asset_path('scan.svg') %>" alt="Scan" class=" p-10">
+        <img src= "<%= asset_path('scan.svg') %>" alt="Scan" class="w-32 p-12">
       </label>
     </div>
     <%= form.file_field :image, class: "hidden", data: { action: "change->scan#submit" } %>
   <% end %>
+  <p class="text-red font-extralight mt-6 ">Scannez la pochette de votre album</p>
 </div>
