@@ -2,18 +2,17 @@
   <div>
     <% @vinyls.each do |vinyl| %>
       <%= link_to vinyl_path(vinyl), class: "block px-4 py-2" do %>
-        <div class="bg-dark-red flex flex-row rounded-lg p-4 flex-grow">
-          <img class="rounded-full w-20 h-20" src="<%= vinyl.image %>" alt="">
-            <div class=" flex flex-col text-left ml-5">
-              <span class="mb-2 font-tuskerGrotesk font-medium text-white"><%= vinyl.title %></span>
+        <div class="bg-dark flex items-center rounded-lg p-2 flex-grow">
+          <img class="shadow-md rounded-full w-20 h-20" src="<%= vinyl.image %>" alt="">
+            <div class="flex flex-col text-left ml-5">
+              <span class="text-xl font-tuskerGrotesk text-white tracking-wide"><%= vinyl.title %></span>
               <span class="text-red"><%= vinyl.artist_name %></span>
               <span class="text-white font-scto"><%= vinyl.year %></span>
             </div>
-
         </div>
       <% end %>
     <% end %>
   </div>
 <% else %>
-  <p class="text-white mt-10">Nous n'avons pas trouvé de correspondance à votre recherche.</p>
+  <p class="text-white text-center font-scto text-xl mt-10">Aucun album correspondant :(</p>
 <% end %>
