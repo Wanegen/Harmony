@@ -39,20 +39,20 @@
     <div class="flex flex-col justify-center text-center relative z-30">
       <h1 class="font-tuskerGrotesk font-medium text-red text-4xl mt-4 ml-6 mr-6"><%= @vinyl.title %></h1>
       <h3 class="font-tuskerGrotesk font-light text-white text-2xl mt-2"><%= @vinyl.artist_name %></h3>
-      <p class="font-scto text-red mt-1"><%= @vinyl.year %> - <%= @vinyl.genres %></p>
+      <p class="text-red mt-1"><%= @vinyl.year %> - <%= @vinyl.genres %></p>
     </div>
 
     <div class="flex">
       <% if @vinyl.tracks.present? %>
         <div class="flex flex-col">
           <div class="flex flex-col">
-            <span class="font-scto text-md text-white mt-10 mb-4 text-left">On s'écoute ça ?</span>
+            <span class="text-md text-white mt-10 mb-4 text-left">On s'écoute ça ?</span>
           </div>
           <div class="text-white mb-4 text-center">
             <ul class="mb-8 relative z-0">
               <% @vinyl.tracks.each_with_index do |track, index| %>
                 <% truncated_title = track['title'].length > 24 ? "#{track['title'][0, 24]}..." : track['title'] %>
-                <li class="font-scto text-left mb-3"><%= index + 1 %> - <span class="text-red"><%= truncated_title %></span></li>
+                <li class="text-left mb-3"><%= index + 1 %> - <span class="text-red"><%= truncated_title %></span></li>
                 <audio class="mb-4" controls controlsList="nodownload noplaybackrate" data-music-target="audio" data-action="play->music#play pause->music#stop">
                   <source src="<%= track['preview_url'] %>" type="audio/mpeg">
                 </audio>
