@@ -13,6 +13,14 @@
  *= require_tree .
  *= require_self
  */
+ .no-scrollbar-please::-webkit-scrollbar {
+  display: none;
+ }
+
+ html, .no-scrollbar-please {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+ }
 
  .custom-height {
   min-height: 100dvh;
@@ -31,6 +39,7 @@
  .div-scroller {
   left: 0;
   right: 0;
+  width: 100vw;
   overflow: hidden;
  }
 
@@ -164,17 +173,6 @@ audio::-webkit-media-controls-time-remaining-display {
   animation: rotation 10s infinite linear forwards;
   animation-delay: 1s;
 }
-
-#no-scrollbar {
-  scrollbar-width: none;
-}
-
-
-#no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-
 
 #dot {
   width: 2rem;

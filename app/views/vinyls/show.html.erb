@@ -1,10 +1,10 @@
-<div class="bg-dark flex flex-col justify-center items-center custom-height pb-20" data-controller="spotify music">
+<div class="bg-dark flex flex-col justify-center items-center custom-height pb-20 relative overflow-x-hidden" data-controller="spotify music">
   <div class="flex flex-col justify-start items-start w-full">
     <%= link_to '← Retour', vinyls_path, class: "relative z-40 mt-10 ml-12 rounded-full p-2 pl-6 pr-6 text-md font-scto text-red border border-red" %>
   </div>
 
   <div class="flex flex-col items-center mt-12">
-    <div class="flex poster relative z-20" style="display: flex; align-content: center; vertical-align: center; justify-content: center; position: relative;">
+    <div class="flex poster relative z-20" style="display: flex; align-content: center; vertical-align: center; justify-content: center; position: relative; overflow: hidden;">
       <span id="dot" style="position: absolute; z-index: 10; top:85px"></span>
       <img class="vinyl w-52 h-52" src="<%= @vinyl.image %>" alt="" class="vinyl w-60 h-60" data-music-target="vinyl" data-action="mousemove->music#scratch">
     </div>
