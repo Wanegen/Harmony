@@ -13,41 +13,46 @@
  *= require_tree .
  *= require_self
  */
- .no-scrollbar-please::-webkit-scrollbar {
+.no-scrollbar-please::-webkit-scrollbar {
   display: none;
- }
+}
 
- html, .no-scrollbar-please {
-  -ms-overflow-style: none;  /* IE and Edge */
+html,
+.no-scrollbar-please {
+  -ms-overflow-style: none;
+  /* IE and Edge */
   scrollbar-width: none;
- }
+}
 
- .custom-height {
+html::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-height {
   min-height: 100dvh;
- }
+}
 
 .fake-contour {
   -webkit-text-stroke-width: 0.3px;
   -webkit-text-stroke-color: #FF4747;
- }
+}
 
- .scroller {
+.scroller {
   width: 100%;
   overflow: hidden;
- }
+}
 
- .div-scroller {
+.div-scroller {
   left: 0;
   right: 0;
   width: 100vw;
   overflow: hidden;
- }
+}
 
- .scroller-inner {
+.scroller-inner {
   width: max-content;
   flex-wrap: nowrap;
-  animation: scroll var(--_animation-duration, 40s)
-  var(--_animation-direction, forwards) linear infinite;
+  animation: scroll var(--_animation-duration, 40s) var(--_animation-direction, forwards) linear infinite;
 }
 
 .scroller[data-direction="right"] {
@@ -72,7 +77,7 @@
   }
 }
 
- audio::-webkit-media-controls-panel {
+audio::-webkit-media-controls-panel {
   display: flex;
   background-color: #FF4747;
   flex-direction: row-reverse;
@@ -111,6 +116,7 @@ audio::-webkit-media-controls-time-remaining-display {
   aspect-ratio: 1;
   position: relative;
 }
+
 .loader:before,
 .loader:after {
   content: "";
@@ -119,6 +125,7 @@ audio::-webkit-media-controls-time-remaining-display {
   box-shadow: 0 0 0 3px inset #FF4747;
   animation: l4 2.5s infinite;
 }
+
 .loader:after {
   animation-delay: -1.25s;
 }
@@ -127,27 +134,35 @@ audio::-webkit-media-controls-time-remaining-display {
   0% {
     inset: 0 35px 35px 0;
   }
+
   12.5% {
     inset: 0 35px 0 0;
   }
+
   25% {
     inset: 35px 35px 0 0;
   }
+
   37.5% {
     inset: 35px 0 0 0;
   }
+
   50% {
     inset: 35px 0 0 35px;
   }
+
   62.5% {
     inset: 0 0 0 35px;
   }
+
   75% {
     inset: 0 0 35px 35px;
   }
+
   87.5% {
     inset: 0 0 35px 0;
   }
+
   100% {
     inset: 0 35px 35px 0;
   }
@@ -164,8 +179,8 @@ audio::-webkit-media-controls-time-remaining-display {
 }
 
 .yellow-btn:disabled {
- opacity: 0.5;
- cursor: not-allowed;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .vinyl {
